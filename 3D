@@ -1,0 +1,397 @@
+#include <GL/glut.h>  // GLUT, include glu.h and gl.h
+
+/* Global variables */
+char title[] = "estrella3D";
+GLfloat star = 4.0f;     // Ángulo de rotación para DIAMOND [NUEVO]
+int refreshMills = 28;        // intervalo de actualización en milisegundos [NUEVO]
+// *Inicializar gráficos OpenGL * //
+void initGL() {
+    glClearColor(6.0f, 6.0f, 6.0f, 6.0f); // Establecer el color de fondo 
+    glClearDepth(1.0f);                   // Establecer la profundidad de fondo al más lejano
+    glEnable(GL_DEPTH_TEST);   //Habilite las pruebas de profundidad para z-culling
+    glDepthFunc(GL_LEQUAL);    // Establecer el tipo de prueba de profundidad
+    glShadeModel(GL_SMOOTH);   // Habilitar sombreado suave
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // correcciones de perspectiva
+}
+
+/* Controlador para el evento de repintado de ventanas. Llamado de nuevo cuando la ventana aparece por primera vez y
+   siempre que sea necesario volver a pintar la ventana. */
+void display() {//menampilkan objek 3d
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Búferes de profundidad y color claros
+    glMatrixMode(GL_MODELVIEW);     // Para operar en matriz de vista de modelo
+
+    //Renderiza un cubo de color que consta de 6 quads con diferentes colores
+    glLoadIdentity();                 // restablecer la matriz de vista de modelo
+    glTranslatef(-0.1f, 0.0f, -9.0f);  // muévete hacia la derecha y hacia la pantalla
+    glRotatef(star, 1.0f, 0.0f, 0.0f);  // Gire alrededor del eje(1, 1, 1)[NUEVO]
+
+    //inicial
+
+    glBegin(GL_TRIANGLES);
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); 
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); //l ngarep
+    glColor3f(0.6f, 0.6f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); //c
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); //l mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); //c
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); //d ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.5f, 0.0f, 0.0f);
+    glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); //c
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); //d mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+
+
+
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.3, -0.5, 0.0f); //k
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); //j ngarep
+    glColor3f(0.6f, 0.6f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.3, -0.5, 0.0f); //k
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); //j mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.3, -0.5, 0.0f); //k
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); //l ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.5f, 0.0f, 0.0f);
+    glVertex3f(-0.3, -0.5, 0.0f); //k
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); //l mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+
+
+
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); //l
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); //j ngarep
+    glColor3f(0.6f, 0.6f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); //l
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); //j mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); //l
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(0.1335651297556, -0.239042579995, 0.0f); //h ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.5f, 0.0f, 0.0f);
+    glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); //l
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.1335651297556, -0.239042579995, 0.0f); //h mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+
+
+
+
+
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); //g
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(0.1335651297556, -0.239042579995, 0.0f); //h ngarep
+    glColor3f(0.6f, 0.6f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); //g
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.1335651297556, -0.239042579995, 0.0f); //h mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); //g
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(0.061002771479, 0.0044444444444, 0.0f); //f ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); //g
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.061002771479, 0.0044444444444, 0.0f); //f mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+
+
+
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); //e
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(0.061002771479, 0.0044444444444, 0.0f); //f ngarep
+
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); //e
+    glVertex3f(0.061002771479, 0.0044444444444, 0.0f); //f mburi
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); //e
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); //d ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.5f, 0.0f, 0.0f);
+    glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); //e
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); //d mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+    glEnd();
+
+
+
+
+
+    glLoadIdentity();                 // Restablecer la matriz de vista de modelo
+    glTranslatef(0.5f, 0.3f, -9.0f);  // Muévete hacia la derecha y entra en la pantalla
+    glRotatef(star, 0.0f, 1.0f, 0.0f);  // Gire alrededor del eje (1,1,1) [NUEVO]
+
+     //inicial
+
+    glBegin(GL_TRIANGLES);
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); //c
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); //l ngarep
+    glColor3f(0.4f, 0.6f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); //c
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); //l mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); //c
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); //d ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.5f, 0.0f, 0.0f);
+    glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); //c
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); //d mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+
+
+
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.3, -0.5, 0.0f); //k
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); //j ngarep
+    glColor3f(0.6f, 0.6f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.3, -0.5, 0.0f); //k
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); //j mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.3, -0.5, 0.0f); //k
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); //l ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.5f, 0.0f, 0.0f);
+    glVertex3f(-0.3, -0.5, 0.0f); //k
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); //l mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+
+
+
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); //l
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); //j ngarep
+    glColor3f(0.6f, 0.6f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); //l
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); //j mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); //l
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(0.1335651297556, -0.239042579995, 0.0f); //h ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.5f, 0.0f, 0.0f);
+    glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); //l
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.1335651297556, -0.239042579995, 0.0f); //h mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+
+
+
+
+
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); //g
+    glColor3f(0.8f, 0.8f, 0.0f);
+    glVertex3f(0.1335651297556, -0.239042579995, 0.0f); //h ngarep
+    glColor3f(0.6f, 0.6f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); //g
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.1335651297556, -0.239042579995, 0.0f); //h mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); //g
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(0.061002771479, 0.0044444444444, 0.0f); //f ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); //g
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(0.061002771479, 0.0044444444444, 0.0f); //f mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+
+
+
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); //e
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(0.061002771479, 0.0044444444444, 0.0f); //f ngarep
+
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); //e
+    glVertex3f(0.061002771479, 0.0044444444444, 0.0f); //f mburi
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); //e
+    glColor3f(0.9f, 0.9f, 0.0f);
+    glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); //d ngarep
+    glColor3f(1.0f, 1.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); //m
+
+    glColor3f(0.5f, 0.0f, 0.0f);
+    glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); //e
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); //d mburi
+    glColor3f(0.6f, 0.0f, 0.0f);
+    glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); //m
+    glEnd();
+
+
+
+
+    glutSwapBuffers();  // Intercambiar los búferes del marco delantero y trasero (doble búfer)
+
+    // Actualiza el ángulo de rotación después de cada actualización 
+
+    star -= 0.90f;
+}
+
+
+/*  Llamado de nuevo cuando el temporizador expiró [NUEVO] */
+void timer(int value) {
+    glutPostRedisplay();      // Solicitud de repintado posterior para activar la pantalla ()
+    glutTimerFunc(refreshMills, timer, 0); // próxima llamada del temporizador milisegundos más tarde
+}
+
+/* Controlador para el evento de cambio de tamaño de la ventana. Llamado de nuevo cuando la ventana aparece por primera vez y
+   cada vez que se cambia el tamaño de la ventana con su nuevo ancho y alto*/
+void reshape(GLsizei width, GLsizei height) {  // GLsizei para entero no negativo
+   // Calcular la relación de aspecto de la nueva ventana
+    if (height == 0) height = 1;                // Para evitar dividir por 0
+    GLfloat aspect = (GLfloat)width / (GLfloat)height;
+
+    // Configurar la ventana gráfica para cubrir la nueva ventana
+    glViewport(0, 0, width, height);
+
+    // Establezca la relación de aspecto del volumen de recorte para que coincida con la ventana gráfica
+    glMatrixMode(GL_PROJECTION);  // para operar en la matriz de proyección
+    glLoadIdentity();             // reiniciar
+    // Habilite la proyección en perspectiva con fovy, aspect, zNear and zFar
+    gluPerspective(15.0f, aspect, 0.1f, 100.0f);//escala
+}
+
+// *Función principal : GLUT se ejecuta como una aplicación de consola comenzando en main() * // 
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);            // inicializar GLUT
+    glutInitDisplayMode(GLUT_DOUBLE); // Habilitar el modo de doble búfer
+    glutInitWindowSize(1000, 1000);   //Establecer el ancho y alto inicial de la ventana
+    glutInitWindowPosition(50, 50); // Coloque la esquina superior izquierda inicial de la ventana
+    glutCreateWindow(title);          // Crear ventana con el título dado
+    glutDisplayFunc(display);       // Registre el controlador de devolución de llamada para el evento de pintura de ventana
+    glutReshapeFunc(reshape);       // Registre el controlador de devolución de llamada para el evento de cambio de tamaño de la ventana
+    initGL();                       // Nuestra propia inicialización de OpenGL
+    glutTimerFunc(0, timer, 0);     // Llamada por primera vez inmediatamente [NUEVO]
+    glutMainLoop();                 // Ingrese al bucle infinito de procesamiento de eventos
+    return 0;
+}
